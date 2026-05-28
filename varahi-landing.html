@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Varahi — Pure from the Earth</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --amber: #e76f00;
+    --amber-light: #fff3e0;
+    --earth: #7c5c3e;
+    --cream: #faf6f0;
+    --text-dark: #1a1a18;
+    --text-muted: #5a5a50;
+    --white: #ffffff;
+    --border: rgba(45,106,79,0.15);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(250,246,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green-mid);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; fill: var(--white); }
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px;
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.9rem; font-weight: 400;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-mid); }
+  .nav-cta {
+    background: var(--green-mid); color: var(--white);
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--green-deep); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5vw 4vw 5vw 7vw;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale); color: var(--green-mid);
+    padding: 0.4rem 1rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-light);
+  }
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--green-deep);
+    margin-bottom: 1.5rem;
+  }
+  .hero-h1 em {
+    font-style: italic; color: var(--amber);
+  }
+  .hero-sub {
+    font-size: 1.05rem; line-height: 1.7;
+    color: var(--text-muted); max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; align-items: center;
+  }
+  .btn-primary {
+    background: var(--green-mid); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--green-deep); transform: translateY(-1px); }
+  .btn-outline {
+    color: var(--green-mid); padding: 0.85rem 1.5rem;
+    font-size: 0.95rem; font-weight: 400; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: gap 0.2s;
+  }
+  .btn-outline:hover { gap: 10px; }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--green-deep);
+  }
+  .stat-label {
+    font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;
+  }
+
+  .hero-right {
+    position: relative;
+    background: linear-gradient(160deg, #2d6a4f 0%, #1a3a2a 100%);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(82,183,136,0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(231,111,0,0.15) 0%, transparent 50%);
+  }
+  .hero-img-card {
+    position: relative; z-index: 1;
+    width: 380px;
+  }
+  .leaf-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    padding: 2rem;
+  }
+  .leaf-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 1.2rem;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .leaf-card .lc-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .leaf-card .lc-name {
+    font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.9);
+  }
+  .leaf-card .lc-desc {
+    font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.4;
+  }
+  .leaf-card.featured {
+    grid-column: span 2;
+    background: rgba(231,111,0,0.2);
+    border-color: rgba(231,111,0,0.4);
+    flex-direction: row; align-items: center;
+  }
+  .leaf-card.featured .lc-icon {
+    background: rgba(231,111,0,0.3); flex-shrink: 0;
+  }
+  .hero-badge {
+    position: absolute; bottom: 2rem; left: 2rem;
+    background: var(--white); border-radius: 14px;
+    padding: 0.8rem 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  }
+  .badge-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; }
+  .badge-text { font-size: 0.8rem; color: var(--text-muted); }
+  .badge-text strong { color: var(--text-dark); display: block; font-size: 0.85rem; }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--green-deep);
+    padding: 0.9rem 0; overflow: hidden;
+    display: flex; gap: 0;
+  }
+  .marquee-track {
+    display: flex; gap: 3rem; animation: marquee 18s linear infinite;
+    white-space: nowrap; align-items: center;
+  }
+  .marquee-item {
+    font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .marquee-item::after {
+    content: '✦'; color: var(--green-light); font-size: 0.7rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 7vw; }
+  .section-tag {
+    font-size: 0.78rem; font-weight: 500; color: var(--green-mid);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--green-deep);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem; line-height: 1.7; color: var(--text-muted);
+    max-width: 500px;
+  }
+
+  /* ── PRODUCTS ── */
+  .products-section { background: var(--white); }
+  .products-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .product-card {
+    border: 1px solid var(--border); border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(29,158,117,0.12);
+  }
+  .product-img {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img-1 { background: linear-gradient(135deg, #d8f3dc, #b7e4c7); }
+  .product-img-2 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+  .product-img-3 { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+  .product-img-4 { background: linear-gradient(135deg, #fce4ec, #f8bbd9); }
+  .product-img-5 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+  .product-img-6 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+  .product-body { padding: 1.3rem; }
+  .product-cat {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 0.5rem;
+  }
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--green-deep); margin-bottom: 0.4rem;
+  }
+  .product-desc {
+    font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .product-tag {
+    background: var(--green-pale); color: var(--green-mid);
+    padding: 0.25rem 0.75rem; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .product-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--green-mid); font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .product-card:hover .product-arrow {
+    background: var(--green-mid); color: var(--white);
+  }
+
+  /* ── WHY ── */
+  .why-section {
+    background: var(--green-deep);
+    display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem;
+    align-items: center;
+  }
+  .why-left .section-tag { color: var(--green-light); }
+  .why-left .section-h2 { color: var(--white); }
+  .why-left .section-sub { color: rgba(255,255,255,0.6); max-width: 380px; }
+  .why-features {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .why-feat {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .why-feat-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .why-feat-title {
+    font-weight: 500; color: var(--white); font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+  .why-feat-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .why-right {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .why-stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 1.5rem;
+    text-align: center;
+  }
+  .why-stat-card.accent {
+    background: rgba(231,111,0,0.2); border-color: rgba(231,111,0,0.35);
+  }
+  .why-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.4rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .why-stat-card.accent .why-stat-num { color: #ffb74d; }
+  .why-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--cream); }
+  .test-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .test-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 1.8rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .test-stars { color: var(--amber); font-size: 0.9rem; letter-spacing: 2px; }
+  .test-quote {
+    font-size: 0.9rem; line-height: 1.65; color: var(--text-muted);
+    flex: 1;
+  }
+  .test-author { display: flex; gap: 10px; align-items: center; }
+  .test-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 600; color: var(--green-mid);
+  }
+  .test-name { font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
+  .test-place { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--green-mid);
+    text-align: center; padding: 5rem 7vw;
+  }
+  .cta-section .section-h2 { color: var(--white); margin-bottom: 0.8rem; }
+  .cta-section p { color: rgba(255,255,255,0.75); font-size: 1rem; margin-bottom: 2rem; }
+  .cta-btn {
+    background: var(--white); color: var(--green-mid);
+    padding: 0.9rem 2.5rem; border-radius: 100px;
+    font-size: 1rem; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+  }
+  .cta-btn:hover { background: var(--cream); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    padding: 3.5rem 7vw 2rem;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .foot-brand .logo-text { color: var(--white); }
+  .foot-brand p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.4);
+    margin-top: 0.8rem; line-height: 1.6;
+  }
+  .foot-col h4 {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    margin-bottom: 1rem;
+  }
+  .foot-col ul { list-style: none; }
+  .foot-col li { margin-bottom: 0.6rem; }
+  .foot-col a {
+    font-size: 0.875rem; color: rgba(255,255,255,0.6); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .foot-col a:hover { color: var(--white); }
+  .foot-bottom {
+    background: var(--green-deep);
+    padding: 1.2rem 7vw;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.8rem; color: rgba(255,255,255,0.35);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8 6 4 9 4 14a8 8 0 0016 0c0-5-4-8-8-12z"/>
+      </svg>
+    </div>
+    <span class="logo-text">Varahi</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Varahi</a></li>
+    <li><a href="#testimonials">Farmers Say</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">100% Organic &amp; Natural</div>
+    <h1 class="hero-h1">Grown from <em>Nature,</em><br>Made for Farmers</h1>
+    <p class="hero-sub">Varahi brings you a curated range of bio-solutions and organic agricultural inputs — designed to improve soil health, boost yields, and protect your crops naturally.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products →</a>
+      <a href="#why" class="btn-outline">Learn more ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Organic Products</div>
+      </div>
+      <div>
+        <div class="stat-num">32+</div>
+        <div class="stat-label">States Covered</div>
+      </div>
+      <div>
+        <div class="stat-num">50K+</div>
+        <div class="stat-label">Farmers Served</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-card">
+      <div class="leaf-grid">
+        <div class="leaf-card">
+          <div class="lc-icon">🌱</div>
+          <div class="lc-name">Bio Stimulants</div>
+          <div class="lc-desc">Boosts root growth naturally</div>
+        </div>
+        <div class="leaf-card">
+          <div class="lc-icon">🛡️</div>
+          <div class="lc-name">Crop Protection</div>
+          <div class="lc-desc">Safe, eco-friendly pest control</div>
+        </div>
+        <div class="leaf-card">
+          <div class="lc-icon">💧</div>
+          <div class="lc-name">Soil Enrichment</div>
+          <div class="lc-desc">Improve soil microbiome</div>
+        </div>
+        <div class="leaf-card">
+          <div class="lc-icon">🌾</div>
+          <div class="lc-name">Micronutrients</div>
+          <div class="lc-desc">Balanced crop nutrition</div>
+        </div>
+        <div class="leaf-card featured">
+          <div class="lc-icon">⭐</div>
+          <div>
+            <div class="lc-name">Trusted by 50,000+ Farmers across India</div>
+            <div class="lc-desc">Proven results since 2010</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <div class="badge-text"><strong>New Arrivals</strong>3 new products this season</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Bio Stimulants</span>
+    <span class="marquee-item">Organic Crop Care</span>
+    <span class="marquee-item">Soil Health Solutions</span>
+    <span class="marquee-item">Micronutrient Blends</span>
+    <span class="marquee-item">Neem-based Products</span>
+    <span class="marquee-item">Bio Fungicides</span>
+    <span class="marquee-item">Root Growth Boosters</span>
+    <span class="marquee-item">Friends of the Earth</span>
+    <span class="marquee-item">Bio Stimulants</span>
+    <span class="marquee-item">Organic Crop Care</span>
+    <span class="marquee-item">Soil Health Solutions</span>
+    <span class="marquee-item">Micronutrient Blends</span>
+    <span class="marquee-item">Neem-based Products</span>
+    <span class="marquee-item">Bio Fungicides</span>
+    <span class="marquee-item">Root Growth Boosters</span>
+    <span class="marquee-item">Friends of the Earth</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-tag">Our Range</div>
+      <h2 class="section-h2">Products Built for<br>Every Crop</h2>
+    </div>
+    <a href="#" class="btn-outline" style="color: var(--green-mid);">View all products →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img product-img-1">🌿</div>
+      <div class="product-body">
+        <div class="product-cat">Bio Stimulant</div>
+        <div class="product-name">Varahi Green Plus</div>
+        <div class="product-desc">A powerful blend of seaweed extracts and microorganisms to accelerate vegetative growth.</div>
+        <div class="product-footer">
+          <span class="product-tag">Foliar Spray</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img product-img-2">🧪</div>
+      <div class="product-body">
+        <div class="product-cat">Micronutrient</div>
+        <div class="product-name">Varahi MicroFed</div>
+        <div class="product-desc">Precision micronutrient formula addressing zinc, boron, and iron deficiencies in soil.</div>
+        <div class="product-footer">
+          <span class="product-tag">Soil Application</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img product-img-3">💧</div>
+      <div class="product-body">
+        <div class="product-cat">Soil Health</div>
+        <div class="product-name">Varahi RootShield</div>
+        <div class="product-desc">Bio-inoculant containing beneficial fungi for enhanced root uptake and nematode suppression.</div>
+        <div class="product-footer">
+          <span class="product-tag">Root Drench</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img product-img-4">🛡️</div>
+      <div class="product-body">
+        <div class="product-cat">Crop Protection</div>
+        <div class="product-name">Varahi NimGuard</div>
+        <div class="product-desc">Cold-pressed neem oil formulation effective against a wide range of sucking and chewing pests.</div>
+        <div class="product-footer">
+          <span class="product-tag">Organic</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img product-img-5">🍄</div>
+      <div class="product-body">
+        <div class="product-cat">Bio Fungicide</div>
+        <div class="product-name">Varahi FungoCure</div>
+        <div class="product-desc">Trichoderma-based fungicide for prevention and treatment of soil-borne fungal pathogens.</div>
+        <div class="product-footer">
+          <span class="product-tag">Preventive</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img product-img-6">🌾</div>
+      <div class="product-body">
+        <div class="product-cat">Yield Booster</div>
+        <div class="product-name">Varahi GrainMax</div>
+        <div class="product-desc">Amino acid and humic acid blend to enhance grain filling and improve harvest quality.</div>
+        <div class="product-footer">
+          <span class="product-tag">New Launch</span>
+          <div class="product-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div class="why-left">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-h2" style="color:white;">Science Meets<br>Tradition</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.6);max-width:380px;">Our products are rooted in decades of agricultural research, combining modern biotechnology with time-tested organic principles.</p>
+    <div class="why-features">
+      <div class="why-feat">
+        <div class="why-feat-icon">🔬</div>
+        <div>
+          <div class="why-feat-title">Research-Backed Formulations</div>
+          <div class="why-feat-desc">Each product is tested across multiple crop types before market release.</div>
+        </div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">🌍</div>
+        <div>
+          <div class="why-feat-title">Eco-Certified & Safe</div>
+          <div class="why-feat-desc">Zero harmful residues. Safe for soil, water, and beneficial insects.</div>
+        </div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">📞</div>
+        <div>
+          <div class="why-feat-title">Farmer-First Support</div>
+          <div class="why-feat-desc">Dedicated agronomists available 7 days a week for crop advisory.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="why-right">
+    <div class="why-stat-card accent">
+      <div class="why-stat-num">30%</div>
+      <div class="why-stat-label">Average yield increase reported by farmers</div>
+    </div>
+    <div class="why-stat-card">
+      <div class="why-stat-num">15+</div>
+      <div class="why-stat-label">Years of field research behind each product</div>
+    </div>
+    <div class="why-stat-card">
+      <div class="why-stat-num">100%</div>
+      <div class="why-stat-label">Organic — no synthetic chemicals</div>
+    </div>
+    <div class="why-stat-card accent" style="background:rgba(82,183,136,0.2);border-color:rgba(82,183,136,0.35);">
+      <div class="why-stat-num" style="color:#74c69d;">50K+</div>
+      <div class="why-stat-label">Active farmers using Varahi products</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-tag">Farmer Stories</div>
+  <h2 class="section-h2">What Our Farmers Say</h2>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"After using Varahi RootShield on my banana crop, I saw a clear reduction in nematode damage. The roots looked healthier and the fruit quality improved significantly."</p>
+      <div class="test-author">
+        <div class="test-avatar">TR</div>
+        <div>
+          <div class="test-name">Thangamani R.</div>
+          <div class="test-place">Erode, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Varahi MicroFed fixed the yellowing in my paddy that nothing else could. My yield jumped by 25% this kharif season. I'm recommending it to everyone in my village."</p>
+      <div class="test-author">
+        <div class="test-avatar">JS</div>
+        <div>
+          <div class="test-name">Jainal Singh</div>
+          <div class="test-place">Dharamkot, Punjab</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Varahi NimGuard worked well against whitefly infestation on my chilli crop. No chemical residues and it's safe for my workers. Very happy with the results."</p>
+      <div class="test-author">
+        <div class="test-avatar">RM</div>
+        <div>
+          <div class="test-name">Ramesh M.</div>
+          <div class="test-place">Hubli, Karnataka</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="section-h2">Ready to Transform Your Farm?</h2>
+  <p>Talk to our agronomists and find the right Varahi product for your crop.</p>
+  <a href="tel:+919080385602" class="cta-btn">Call Us: +91 90803 85602</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <div class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 9 4 14a8 8 0 0016 0c0-5-4-8-8-12z"/></svg></div>
+      <span class="logo-text">Varahi</span>
+    </div>
+    <p>Pure organic agricultural solutions rooted in nature and backed by science.</p>
+  </div>
+  <div class="foot-col">
+    <h4>Products</h4>
+    <ul>
+      <li><a href="#">Bio Stimulants</a></li>
+      <li><a href="#">Micronutrients</a></li>
+      <li><a href="#">Crop Protection</a></li>
+      <li><a href="#">Soil Health</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About Varahi</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h4>Support</h4>
+    <ul>
+      <li><a href="#">Farmer Helpline</a></li>
+      <li><a href="#">Dealer Locator</a></li>
+      <li><a href="#">WhatsApp Us</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="foot-bottom">© 2026 Varahi Agri Solutions. All rights reserved.</div>
+
+</body>
+</html>
